@@ -449,24 +449,13 @@ String _createContentsJson(String content) {
 }
 
 final basicDartMetadata = _createContentsJson('''
-{
-  "name": "A Dart Exercise",
-  "mode": "dart",
-  "files": [
-    {
-      "name": "main.dart"
-    },
-    {
-      "name": "solution.dart"
-    },
-    {
-      "name": "test.dart"
-    },
-    {
-      "name": "hint.txt"
-    }
-  ]
-}
+name: A Dart Exercise
+mode: dart
+files: 
+  - name: main.dart
+  - name: solution.dart
+  - name: test.dart
+  - name: hint.txt
 ''');
 
 final altBranchMetadata = _createContentsJson('''

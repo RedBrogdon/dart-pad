@@ -1,7 +1,7 @@
 // Copyright (c) 2019, the Dart project authors.  Please see the AUTHORS file
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
-
+import 'package:yaml/yaml.dart';
 /// An exception thrown when a metadata file has missing or invalid fields.
 class MetadataException implements Exception {
   final String message;
@@ -87,7 +87,7 @@ class ExerciseMetadata {
     name = json['name'];
     mode = exerciseModeNames[json['mode']];
     files = (json['files'] as Iterable<dynamic>)
-        .map((f) => ExerciseFileMetadata.fromJson(f))
+        .map((f) => ExerciseFileMetadata.fromJson(Map.from(f)))
         .toList();
   }
 }

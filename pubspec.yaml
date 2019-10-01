@@ -30,6 +30,7 @@ dependencies:
     git:
       url: git://github.com/jifalops/mdc_web.git
       ref: 0ac7d5b4386863d91ec397600a326e622031513f
+  yaml: ^2.2.0
 dev_dependencies:
   build_runner: any
   build_test: any

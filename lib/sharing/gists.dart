@@ -12,6 +12,7 @@ import 'package:http/http.dart' as http;
 import 'package:dart_pad/sharing/exercise_metadata.dart';
 import 'package:dart_pad/src/sample.dart' as sample;
 import 'package:haikunator/haikunator.dart';
+import 'package:yaml/yaml.dart';
 
 final String _dartpadLink =
     '[dartpad.dartlang.org](https://dartpad.dartlang.org)';
@@ -285,7 +286,12 @@ $styleRef$dartRef  </head>
     ExerciseMetadata metadata;
 
     try {
-      metadata = ExerciseMetadata.fromJson(json.decode(metadataContent));
+      var yamlMap = loadYaml(metadataContent);
+      if(yamlMap is! Map) {
+        throw FormatException();
+      }
+      metadata = ExerciseMetadata.fromJson(
+          Map<String, dynamic>.from(yamlMap));
     } on MetadataException catch (ex) {
       throw GistLoaderException(GistLoaderFailureType.invalidExerciseMetadata,
           'Issue parsing metadata: $ex');
