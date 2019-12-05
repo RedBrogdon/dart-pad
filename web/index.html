@@ -55,10 +55,10 @@
 <header class="mdc-elevation--z4">
     <div class="header-title">
         <img src="dart-192.png" alt="DartPad Logo" class="logo"/>
-        <span>DartPad</span>
+        <span>DartPad with Null Safety</span>
     </div>
     <div>
-        <button type="button" id="new-button" class="mdc-button">
+        <button style="display:none;" type="button" id="new-button" class="mdc-button">
             <i class="material-icons mdc-button__icon">code</i>
             New Pad
         </button>
@@ -71,7 +71,7 @@
             Format
         </button>
     </div>
-    <div class="header-gist-name"></div>
+    <div style="visibility:hidden" class="header-gist-name"></div>
     <div>
         <button type="button" id="samples-dropdown-button" class="mdc-button">
             <span class="mdc-button__label">Samples</span>
@@ -152,7 +152,7 @@
                     </div>
                 </nav>
             </div>
-            <div class="button-group">
+            <div style="display: none" class="button-group">
                 <div id="dartbusy" class="busylight"></div>
                 <button type="button" id="run-button"
                         class="mdc-button mdc-button--raised mdc-button--dense">
@@ -193,8 +193,15 @@
             <iframe id="frame" sandbox="allow-scripts" flex
                     src="scripts/frame.html"></iframe>
             <div id="right-output-panel">
-                <span class="view-label">Console</span>
-                <div id="right-output-panel-content" class="console custom-scrollbar"></div>
+                <div id="right-output-panel-content" class="console custom-scrollbar">
+Welcome to Dart's null safety playground!
+
+This is a beta version of <a href="https://dartpad.dev/">DartPad</a>, built with Dart's
+new null safety features. At the moment it's not capable
+of compiling code, but its analysis functions work fine.
+Try using the "Samples" dropdown in the upper right-hand
+corner to load an example to play with!
+                </div>
             </div>
             <div id="right-doc-panel">
                 <span id="right-doc-label" class="view-label">Documentation</span>

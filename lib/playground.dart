@@ -145,17 +145,27 @@ class Playground implements GistContainer, GistController {
   }
 
   DivElement get _editorHost => querySelector('#editor-host');
+
   DivElement get _rightConsoleElement => querySelector('#right-output-panel');
+
   DivElement get _rightConsoleContentElement =>
       querySelector('#right-output-panel-content');
+
   DivElement get _leftConsoleElement => querySelector('#left-output-panel');
+
   IFrameElement get _frame => querySelector('#frame');
+
   DivElement get _rightDocPanel => querySelector('#right-doc-panel');
+
   DivElement get _rightDocContentElement =>
       querySelector('#right-doc-panel-content');
+
   DivElement get _leftDocPanel => querySelector('#left-doc-panel');
+
   DivElement get _editorPanelHeader => querySelector('#editor-panel-header');
+
   DivElement get _editorPanelFooter => querySelector('#editor-panel-footer');
+
   bool get _isCompletionActive => editor.completionActive;
 
   void _initDialogs() {
@@ -186,16 +196,16 @@ class Playground implements GistContainer, GistController {
   }
 
   void _initLayoutDetection() {
-    debounceStream(mutableGist.onChanged, Duration(milliseconds: 32))
-        .listen((_) {
-      if (hasFlutterContent(_context.dartSource)) {
-        _changeLayout(Layout.flutter);
-      } else if (hasHtmlContent(_context.dartSource)) {
-        _changeLayout(Layout.html);
-      } else {
-        _changeLayout(Layout.dart);
-      }
-    });
+//    debounceStream(mutableGist.onChanged, Duration(milliseconds: 32))
+//        .listen((_) {
+//      if (hasFlutterContent(_context.dartSource)) {
+//        _changeLayout(Layout.flutter);
+//      } else if (hasHtmlContent(_context.dartSource)) {
+//        _changeLayout(Layout.html);
+//      } else {
+//        _changeLayout(Layout.dart);
+//      }
+//    });
   }
 
   void _initButtons() {
@@ -238,17 +248,10 @@ class Playground implements GistContainer, GistController {
     var element = querySelector('#samples-menu');
 
     var samples = [
-      Sample('215ba63265350c02dfbd586dfd30b8c3', 'Hello World', Layout.dart),
-      Sample('e93b969fed77325db0b848a85f1cf78e', 'Int to Double', Layout.dart),
-      Sample('b60dc2fc7ea49acecb1fd2b57bf9be57', 'Mixins', Layout.dart),
-      Sample('7d78af42d7b0aedfd92f00899f93561b', 'Fibonacci', Layout.dart),
-      Sample('a559420eed617dab7a196b5ea0b64fba', 'Sunflower', Layout.html),
-      Sample('cb9b199b1085873de191e32a1dd5ca4f', 'WebSockets', Layout.html),
-      Sample('b6409e10de32b280b8938aa75364fa7b', 'Counter', Layout.flutter),
-      Sample('b3ccb26497ac84895540185935ed5825', 'Sunflower', Layout.flutter),
-      Sample('ecb28c29c646b7f38139b1e7f44129b7', 'Draggables & physics', Layout.flutter),
-      Sample(
-          '40308e0a5f47acba46ba62f4d8be2bf4', 'Implicit animations', Layout.flutter),
+      Sample('1ede47fde8adf5d4dab09bcf6ddf1ec6', 'Hello World', Layout.dart),
+      Sample('d6877b23861d2864d055994000ed086d', 'Hello World', Layout.dart),
+      Sample('cf9c41700058f687be0763c968240cb4', 'Hello World', Layout.dart),
+      Sample('50786448d2765a86be9c6e3b6aa32496', 'Hello World', Layout.dart),
     ];
 
     var listElement = UListElement()
@@ -429,7 +432,7 @@ class Playground implements GistContainer, GistController {
 
     // set up key bindings
     keys.bind(['ctrl-s'], _handleSave, 'Save', hidden: true);
-    keys.bind(['ctrl-enter'], _handleRun, 'Run');
+//    keys.bind(['ctrl-enter'], _handleRun, 'Run');
     keys.bind(['f1'], () {
       ga.sendEvent('main', 'help');
       docHandler.generateDoc(_rightDocContentElement);
@@ -725,65 +728,65 @@ class Playground implements GistContainer, GistController {
   }
 
   void _handleRun() async {
-    ga.sendEvent('main', 'run');
-    runButton.disabled = true;
-
-    Stopwatch compilationTimer = Stopwatch()..start();
-
-    final CompileRequest compileRequest = CompileRequest()
-      ..source = context.dartSource;
-
-    try {
-      if (hasFlutterContent(_context.dartSource) &&
-          !isRunningInWebKit() &&
-          _hasShownWebKitDialog) {
-        final CompileDDCResponse response = await dartServices
-            .compileDDC(compileRequest)
-            .timeout(longServiceCallTimeout);
-
-        ga.sendTiming(
-          'action-perf',
-          'compilation-e2e',
-          compilationTimer.elapsedMilliseconds,
-        );
-
-        _clearOutput();
-
-        return executionService.execute(
-          _context.htmlSource,
-          _context.cssSource,
-          response.result,
-          modulesBaseUrl: response.modulesBaseUrl,
-        );
-      } else {
-        final CompileResponse response = await dartServices
-            .compile(compileRequest)
-            .timeout(longServiceCallTimeout);
-
-        ga.sendTiming(
-          'action-perf',
-          'compilation-e2e',
-          compilationTimer.elapsedMilliseconds,
-        );
-
-        _clearOutput();
-
-        return await executionService.execute(
-          _context.htmlSource,
-          _context.cssSource,
-          response.result,
-        );
-      }
-    } catch (e) {
-      ga.sendException('${e.runtimeType}');
-      final message = (e is DetailedApiRequestError) ? e.message : '$e';
-      _showSnackbar('Error compiling to JavaScript');
-      _clearOutput();
-      _showOutput('Error compiling to JavaScript:\n$message', error: true);
-    } finally {
-      runButton.disabled = false;
-      webOutputLabel.setAttr('hidden');
-    }
+//    ga.sendEvent('main', 'run');
+//    runButton.disabled = true;
+//
+//    Stopwatch compilationTimer = Stopwatch()..start();
+//
+//    final CompileRequest compileRequest = CompileRequest()
+//      ..source = context.dartSource;
+//
+//    try {
+//      if (hasFlutterContent(_context.dartSource) &&
+//          !isRunningInWebKit() &&
+//          _hasShownWebKitDialog) {
+//        final CompileDDCResponse response = await dartServices
+//            .compileDDC(compileRequest)
+//            .timeout(longServiceCallTimeout);
+//
+//        ga.sendTiming(
+//          'action-perf',
+//          'compilation-e2e',
+//          compilationTimer.elapsedMilliseconds,
+//        );
+//
+//        _clearOutput();
+//
+//        return executionService.execute(
+//          _context.htmlSource,
+//          _context.cssSource,
+//          response.result,
+//          modulesBaseUrl: response.modulesBaseUrl,
+//        );
+//      } else {
+//        final CompileResponse response = await dartServices
+//            .compile(compileRequest)
+//            .timeout(longServiceCallTimeout);
+//
+//        ga.sendTiming(
+//          'action-perf',
+//          'compilation-e2e',
+//          compilationTimer.elapsedMilliseconds,
+//        );
+//
+//        _clearOutput();
+//
+//        return await executionService.execute(
+//          _context.htmlSource,
+//          _context.cssSource,
+//          response.result,
+//        );
+//      }
+//    } catch (e) {
+//      ga.sendException('${e.runtimeType}');
+//      final message = (e is DetailedApiRequestError) ? e.message : '$e';
+//      _showSnackbar('Error compiling to JavaScript');
+//      _clearOutput();
+//      _showOutput('Error compiling to JavaScript:\n$message', error: true);
+//    } finally {
+//      runButton.disabled = false;
+//      webOutputLabel.setAttr('hidden');
+//    }
   }
 
   /// Perform static analysis of the source code. Return whether the code
@@ -871,21 +874,21 @@ class Playground implements GistContainer, GistController {
   void _handleSave() => ga.sendEvent('main', 'save');
 
   void _clearOutput() {
-    _rightConsole.clear();
-    _leftConsole.clear();
-    unreadConsoleCounter.clear();
+//    _rightConsole.clear();
+//    _leftConsole.clear();
+//    unreadConsoleCounter.clear();
   }
 
   void _showOutput(String message, {bool error = false}) {
-    _leftConsole.showOutput(message, error: error);
-    _rightConsole.showOutput(message, error: error);
-
-    // If there's no tabs visible or the console is not being displayed,
-    // increment the counter
-    if (tabExpandController == null ||
-        tabExpandController?.state != TabState.console) {
-      unreadConsoleCounter.increment();
-    }
+//    _leftConsole.showOutput(message, error: error);
+//    _rightConsole.showOutput(message, error: error);
+//
+//    // If there's no tabs visible or the console is not being displayed,
+//    // increment the counter
+//    if (tabExpandController == null ||
+//        tabExpandController?.state != TabState.console) {
+//      unreadConsoleCounter.increment();
+//    }
   }
 
   void _showSnackbar(String message) {
@@ -1292,5 +1295,6 @@ class Sample {
   final String gistId;
   final String name;
   final Layout layout;
+
   Sample(this.gistId, this.name, this.layout);
 }
